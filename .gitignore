@@ -130,4 +130,4 @@ dmypy.json
 
 # PyCharm
 .idea
-database.ini
+config/database.ini
