@@ -1,11 +1,12 @@
 import psycopg2
 from config.config import configure
 
-class ConnectionManager():
-    def __init__(self):
+
+class ConnectionManager:
+    def __init__(self, configpath="../config/database.ini"):
         print('Connecting to the PostgreSQL database...')
         try:
-            self.params = configure(filename="config/database.ini")
+            self.params = configure(filename=configpath)
             self.conn = psycopg2.connect(**self.params)
             self.cur = self.conn.cursor()
             print("Successful connect")
@@ -33,15 +34,25 @@ class ConnectionManager():
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
-    def insert(self, table, columns, values):
-        attributes = "%s,"*len(columns)
-        sql = "INSERT INTO "+table+"("+", ".join(columns)+") VALUES("+attributes[:-1]+")"
+    def insert(self, table, columns, values, return_id=False):
+        attributes = ("%s,"*len(columns))[:-1]
+        columns = ", ".join(columns)
+        sql = "INSERT INTO "+table+"("+columns+") VALUES("+attributes+")"
+        if return_id: sql += " RETURNING "+return_id+";"
         try:
-            if isinstance(values, list):
-                self.cur.executemany(sql, values)
-            elif isinstance(values, tuple):
-                self.cur.execute(sql, values)
+            self.cur.execute(sql, values)
+            self.conn.commit()
+            if return_id: return self.cur.fetchone()[0]
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
+
+    def insert_list(self, table,columns, values):
+        attributes = ("%s," * len(columns))[:-1]
+        columns = ", ".join(columns)
+        sql = "INSERT INTO " + table + "(" + columns + ") VALUES(" + attributes + ")"
+        try:
+            self.cur.executemany(sql, values)
             self.conn.commit()
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -60,6 +71,15 @@ class ConnectionManager():
             self.cur.execute(sql)
             received_id = self.cur.fetchone()[0]
             return received_id
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+
+    def get_ids(self, needed_ids, table):
+        sql = "SELECT %s FROM %s" % (needed_ids, table)
+        try:
+            self.cur.execute(sql)
+            received_ids = self.cur.fetchall()
+            return received_ids
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 

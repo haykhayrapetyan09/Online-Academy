@@ -1,20 +1,20 @@
-DROP table IF EXISTS assistant CASCADE;
-DROP table IF EXISTS category CASCADE;
-DROP table IF EXISTS course CASCADE;
-DROP table IF EXISTS exam CASCADE;
-DROP table IF EXISTS chapter CASCADE;
-DROP table IF EXISTS instructor CASCADE;
-DROP table IF EXISTS purchases_course CASCADE;
-DROP table IF EXISTS review CASCADE;
-DROP table IF EXISTS student CASCADE;
-DROP table IF EXISTS subcategory CASCADE;
-DROP table IF EXISTS takes_course CASCADE;
-DROP table IF EXISTS takes_exam CASCADE;
-DROP table IF EXISTS topic CASCADE;
-DROP table IF EXISTS university CASCADE;
-DROP table IF EXISTS views_course CASCADE;
-DROP table IF EXISTS course_rating CASCADE;
-DROP table IF EXISTS instructor_rating CASCADE;
+DROP table IF EXISTS assistant;
+DROP table IF EXISTS category;
+DROP table IF EXISTS course;
+DROP table IF EXISTS exam;
+DROP table IF EXISTS chapter;
+DROP table IF EXISTS instructor;
+DROP table IF EXISTS purchases_course;
+DROP table IF EXISTS review;
+DROP table IF EXISTS student;
+DROP table IF EXISTS subcategory;
+DROP table IF EXISTS takes_course;
+DROP table IF EXISTS takes_exam;
+DROP table IF EXISTS topic;
+DROP table IF EXISTS university;
+DROP table IF EXISTS views_course;
+DROP table IF EXISTS course_rating;
+DROP table IF EXISTS instructor_rating;
 
 CREATE TABLE assistant
 (
