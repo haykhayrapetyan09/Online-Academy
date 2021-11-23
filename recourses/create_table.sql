@@ -135,7 +135,7 @@ CREATE TABLE exam
  exam_id         serial PRIMARY KEY NOT NULL,
  title           text NOT NULL,
  total_questions smallint NOT NULL,
- "time"          time NOT NULL,
+ max_time          time NOT NULL,
  course_id       int NOT NULL
 );
 CREATE INDEX exam_course ON exam(course_id);
@@ -161,7 +161,7 @@ CREATE TABLE takes_exam
  "date"     date NOT NULL,
  start_time time NOT NULL,
  end_time   time,
- duration   interval,
+ duration   time,
  grade      smallint,
  PRIMARY KEY ( student_id, exam_id )
 );

@@ -85,6 +85,6 @@ class ConnectionManager:
 
 
 if __name__ == '__main__':
-    connector = ConnectionManager()
+    connector = ConnectionManager(configpath="config/database.ini")
     connector.db_info()
     connector.close()

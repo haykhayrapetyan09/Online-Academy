@@ -29,6 +29,6 @@ END; $$;
 CREATE OR REPLACE PROCEDURE increment_course(given_course_id int) LANGUAGE plpgsql AS
 $$ BEGIN
 	UPDATE course
-	SET total_chaptser = total_chapters+1
+	SET total_chapters = total_chapters+1
 	WHERE course_id = given_course_id;
 END; $$;
