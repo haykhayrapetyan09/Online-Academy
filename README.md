@@ -19,7 +19,7 @@ user=Your username
 password=Your password
 ```
 
-##Main data insertion
+## Main data insertion
 
 Data insertion consists of several stages.
 Main insert scripts are in insert directory. 
