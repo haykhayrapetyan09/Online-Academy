@@ -1,25 +1,14 @@
+import json
 from connect import ConnectionManager
 from faker import Faker
 fake = Faker()
 
-categories = {
-    "Development":{
-        "Web Development":["JavaScript", "React"],
-        "Data Science":["Python", "Machine Learning", "Deep Learning"],
-        "Programming Languages":["Java", "C#", "C++"]
-    },
-    "Business":{
-        "Communication":["Technical Writing"],
-        "Management":["Leaderhip","Management Skills"],
-        "Sales":["Sales Skills"]
-    },
-    "Marketing":{
-        "Digital Marketing":["Social Media Marketing","Internet Marketing"],
-        "Branding":["Business Branding","Personal Branding"],
-        "Product Marketing":["Marketing Plan"]
-    }
-}
-universities = [line.strip() for line in open('../recourses/universities.txt')]
+
+with open("../recourses/categories.txt") as file:
+    categories = json.load(file)
+with open('../recourses/universities.txt') as file:
+    universities = [line.strip() for line in file]
+
 
 def insert_categories(categories):
     print("Inserting categories, subcategories and topics...")
@@ -41,7 +30,7 @@ def insert_categories(categories):
             subcategory_id = connector.insert(
                 "subcategory",
                 subcategory_column_names,
-                (subcategory, len(categories[category][subcategory]),category_id,),
+                (subcategory, len(categories[category][subcategory]), category_id,),
                 "subcategory_id"
             )
             for topic in categories[category][subcategory]:
@@ -51,18 +40,19 @@ def insert_categories(categories):
                     (topic, 0, subcategory_id,)
                 )
 
+
 def insert_universities(universities):
     print("Inserting universities...")
     n = len(universities)
-    i=1
+    i = 1
     university_column_names = connector.get_column_names("university")[1:]
     for university in universities:
         print(str(i)+"/"+str(n))
-        i+=1
+        i += 1
         connector.insert("university",
                          university_column_names,
-                         (university, fake.address(),0)
-                        )
+                         (university, fake.address(), 0)
+                         )
 
 
 if __name__ == '__main__':
@@ -70,5 +60,3 @@ if __name__ == '__main__':
     insert_universities(universities)
     insert_categories(categories)
     connector.close()
-
-

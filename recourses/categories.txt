@@ -1,0 +1,17 @@
+{
+    "Development":{
+        "Web Development":["JavaScript", "React"],
+        "Data Science":["Python", "Machine Learning", "Deep Learning"],
+        "Programming Languages":["Java", "C#", "C++"]
+    },
+    "Business":{
+        "Communication":["Technical Writing"],
+        "Management":["Leaderhip","Management Skills"],
+        "Sales":["Sales Skills"]
+    },
+    "Marketing":{
+        "Digital Marketing":["Social Media Marketing","Internet Marketing"],
+        "Branding":["Business Branding","Personal Branding"],
+        "Product Marketing":["Marketing Plan"]
+    }
+}

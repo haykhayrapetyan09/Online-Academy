@@ -17,6 +17,7 @@ class ConnectionManager:
         print("Closing connection...")
         if self.conn is not None:
             self.conn.close()
+        print("Have a nice day :)")
 
     def db_info(self):
         try:
@@ -38,16 +39,19 @@ class ConnectionManager:
         attributes = ("%s,"*len(columns))[:-1]
         columns = ", ".join(columns)
         sql = "INSERT INTO "+table+"("+columns+") VALUES("+attributes+")"
-        if return_id: sql += " RETURNING "+return_id+";"
+        if return_id:
+            sql += " RETURNING "+return_id+";"
         try:
             self.cur.execute(sql, values)
             self.conn.commit()
-            if return_id: return self.cur.fetchone()[0]
+            if return_id:
+                return self.cur.fetchone()[0]
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
+            if type(error).__name__ == "UniqueViolation":
+                raise Exception
 
-
-    def insert_list(self, table,columns, values):
+    def insert_list(self, table, columns, values):
         attributes = ("%s," * len(columns))[:-1]
         columns = ", ".join(columns)
         sql = "INSERT INTO " + table + "(" + columns + ") VALUES(" + attributes + ")"
@@ -65,23 +69,26 @@ class ConnectionManager:
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
-    def get_id(self, needed_id, table, column_value):
-        sql = "SELECT %s FROM %s WHERE %s='%s'" % (needed_id, table, column_value[0], column_value[1])
+    def get_columns(self, needed_cols, table, condition=False):
+        needed_cols = ", ".join(needed_cols)
+        sql = "SELECT " + needed_cols + " FROM "+table
+        if condition:
+            sql += " " +condition
         try:
             self.cur.execute(sql)
-            received_id = self.cur.fetchone()[0]
-            return received_id
+            received_columns = self.cur.fetchall()
+            return received_columns
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
-    def get_ids(self, needed_ids, table):
-        sql = "SELECT %s FROM %s" % (needed_ids, table)
-        try:
-            self.cur.execute(sql)
-            received_ids = self.cur.fetchall()
-            return received_ids
-        except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
+    # def get_ids(self, needed_ids, table):
+    #     sql = "SELECT %s FROM %s" % (needed_ids, table)
+    #     try:
+    #         self.cur.execute(sql)
+    #         received_ids = self.cur.fetchall()
+    #         return received_ids
+    #     except (Exception, psycopg2.DatabaseError) as error:
+    #         print(error)
 
 
 if __name__ == '__main__':

@@ -172,10 +172,10 @@ CREATE INDEX takes_exam_exam ON takes_exam(exam_id);
 
 CREATE TABLE views_course
 (
+ view_id serial PRIMARY KEY NOT NULL,
  student_id int NOT NULL,
  course_id  int NOT NULL,
- "date"     timestamp NOT NULL,
- PRIMARY KEY ( student_id, course_id )
+ "date"     timestamp NOT NULL
 );
 CREATE INDEX views_course_student ON views_course(student_id);
 CREATE INDEX views_course_course ON views_course(course_id);
