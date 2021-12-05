@@ -11,7 +11,6 @@ def generate_views_course(n):
     courses_list = connector.get_columns(["course_id, release_date"], "course")
     for i in range(n):
         print(str(i + 1) + "/" + str(n))
-        i += 1
         student_id = random.choice(students_list)[0]
         course_id, release_date = random.choice(courses_list)
         release_date = datetime.datetime(release_date.year, release_date.month, release_date.day)
@@ -25,5 +24,5 @@ def generate_views_course(n):
 
 if __name__ == '__main__':
     connector = ConnectionManager()
-    generate_views_course(100)
+    generate_views_course(200)
     connector.close()

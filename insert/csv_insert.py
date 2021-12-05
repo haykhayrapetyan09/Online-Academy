@@ -13,8 +13,13 @@ def insert_course(n):
     assistants_list = connector.get_columns(["assistant_id"], "assistant")
 
     data = pd.read_csv("../recourses/udemy_courses.csv", usecols=["course_title", "price", "published_timestamp", "num_lectures"])
+    length = len(data)
+    if length < n:
+        print("Given number (%d) is greater than dataset length (%d). Inserting %d courses" % (n, length, length))
+        n = length
+
     courses = data.sample(n=n)
-    courses = courses.rename(columns={"course_title": "title", "published_timestamp": "release_date", "num_lectures":"total_chapters"})
+    courses = courses.rename(columns={"course_title": "title", "published_timestamp": "release_date", "num_lectures": "total_chapters"})
 
     courses["description"] = courses.apply(lambda _: fake.sentence(nb_words=10), axis=1)
     courses["language"] = courses.apply(lambda _: random.choice(["Armenian", "English", "French", "Spanish", "German", "Russian", "Chinese"]), axis=1)
@@ -33,6 +38,7 @@ def insert_course(n):
     course_rating_column_names = connector.get_column_names("course_rating")
     exam_column_names = connector.get_column_names("exam")[1:]
     chapter_column_names = connector.get_column_names("chapter")[1:]
+
     for course in courses:
         print(str(i)+"/"+str(n))
         i += 1
@@ -76,5 +82,5 @@ def insert_exam(exam_column_names, course_id, course_title):
 
 if __name__ == '__main__':
     connector = ConnectionManager()
-    insert_course(50)
+    insert_course(100)
     connector.close()

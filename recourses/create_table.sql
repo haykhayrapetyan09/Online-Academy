@@ -158,9 +158,8 @@ CREATE TABLE takes_exam
 (
  student_id int NOT NULL,
  exam_id    int NOT NULL,
- "date"     date NOT NULL,
- start_time time NOT NULL,
- end_time   time,
+ start_time timestamp NOT NULL,
+ end_time   timestamp,
  duration   time,
  grade      smallint,
  PRIMARY KEY ( student_id, exam_id )

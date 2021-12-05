@@ -48,8 +48,8 @@ class ConnectionManager:
                 return self.cur.fetchone()[0]
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
-            if type(error).__name__ == "UniqueViolation":
-                raise Exception
+            # if type(error).__name__ == "UniqueViolation":
+            #     raise Exception
 
     def insert_list(self, table, columns, values):
         attributes = ("%s," * len(columns))[:-1]

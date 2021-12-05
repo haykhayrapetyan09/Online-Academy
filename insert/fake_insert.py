@@ -10,7 +10,6 @@ def insert_instructor(n):
     universities_list = connector.get_columns(["university_id"], "university")
     for i in range(n):
         print(str(i+1)+"/"+str(n))
-        i += 1
         person = generator.generate_person()
         university_id = random.choice(universities_list)[0]
         instructor_id = connector.insert(
@@ -32,7 +31,6 @@ def insert_assistant(n):
     assistant_column_names = connector.get_column_names("assistant")[1:]
     for i in range(n):
         print(str(i+1) + "/" + str(n))
-        i += 1
         person = generator.generate_person()
         connector.insert(
             "assistant",
@@ -46,7 +44,6 @@ def insert_student(n):
     student_column_names = connector.get_column_names("student")[1:]
     for i in range(n):
         print(str(i+1)+"/"+str(n))
-        i += 1
         person = generator.generate_person()
         connector.insert(
             "student",
@@ -58,7 +55,7 @@ def insert_student(n):
 if __name__ == '__main__':
     connector = ConnectionManager()
     generator = PersonGenerator()
-    insert_instructor(30)
+    insert_instructor(50)
     insert_assistant(10)
-    insert_student(100)
+    insert_student(200)
     connector.close()
