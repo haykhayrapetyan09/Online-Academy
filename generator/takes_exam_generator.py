@@ -14,7 +14,7 @@ def generate_takes_exam(n):
                 "JOIN exam e ON ch.course_id = e.course_id " \
                 "GROUP BY tc.student_id, ch.course_id, e.exam_id)"
 
-    join = " JOIN course cs ON f.course_id = cs.course_id AND f.total_chapters = cs.total_chapters " \
+    join = "JOIN course cs ON f.course_id = cs.course_id AND f.total_chapters = cs.total_chapters " \
            "LEFT JOIN takes_exam te ON f.student_id = te.student_id AND f.exam_id = te.exam_id " \
            "WHERE te.exam_id IS NULL " \
            "ORDER BY random() " \
