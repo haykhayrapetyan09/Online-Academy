@@ -4,9 +4,9 @@ from faker import Faker
 fake = Faker()
 
 
-with open("../recourses/categories.txt") as file:
+with open("../resources/categories.txt") as file:
     categories = json.load(file)
-with open('../recourses/universities.txt') as file:
+with open('../resources/universities.txt') as file:
     universities = [line.strip() for line in file]
 
 

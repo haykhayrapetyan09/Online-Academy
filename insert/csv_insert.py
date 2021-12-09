@@ -12,7 +12,7 @@ def insert_course(n):
     instructors_list = connector.get_columns(["instructor_id"], "instructor")
     assistants_list = connector.get_columns(["assistant_id"], "assistant")
 
-    data = pd.read_csv("../recourses/udemy_courses.csv", usecols=["course_title", "price", "published_timestamp", "num_lectures"])
+    data = pd.read_csv("../resources/udemy_courses.csv", usecols=["course_title", "price", "published_timestamp", "num_lectures"])
     length = len(data)
     if length < n:
         print("Given number (%d) is greater than dataset length (%d). Inserting %d courses" % (n, length, length))
