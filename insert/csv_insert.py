@@ -34,7 +34,7 @@ def insert_course(n):
 
     print("Inserting courses with exams and chapters...")
     i = 1
-    course_column_names = connector.get_column_names("course")[1:]
+    course_column_names = connector.get_column_names("course")[1:-1]
     course_rating_column_names = connector.get_column_names("course_rating")
     exam_column_names = connector.get_column_names("exam")[1:]
     chapter_column_names = connector.get_column_names("chapter")[1:]
@@ -46,7 +46,8 @@ def insert_course(n):
             "course",
             course_column_names,
             course,
-            "course_id"
+            return_id="course_id",
+            add_creation_date=True
         )
         connector.insert(
             "course_rating",

@@ -150,9 +150,7 @@ CREATE TABLE exam
  title           text NOT NULL,
  total_questions smallint NOT NULL,
  max_time          time NOT NULL,
- course_id       int NOT NULL,
- creation_date timestamp,
- modification_date timestamp
+ course_id       int NOT NULL
 );
 CREATE INDEX exam_course ON exam(course_id);
 
@@ -227,8 +225,6 @@ CREATE TABLE chapter
 (
  chapter_id serial PRIMARY KEY NOT NULL,
  name       text NOT NULL,
- course_id  int NOT NULL,
- creation_date timestamp,
- modification_date timestamp
+ course_id  int NOT NULL
 );
 CREATE INDEX chapter_course ON chapter(course_id);

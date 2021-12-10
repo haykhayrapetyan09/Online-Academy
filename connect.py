@@ -1,5 +1,6 @@
 import psycopg2
 from config.config import configure
+from datetime import datetime
 
 
 class ConnectionManager:
@@ -35,7 +36,9 @@ class ConnectionManager:
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
-    def insert(self, table, columns, values, return_id=False):
+    def insert(self, table, columns, values, return_id=False, add_creation_date=False):
+        if add_creation_date:
+            values = values + (datetime.now().replace(microsecond=0),)
         attributes = ("%s,"*len(columns))[:-1]
         columns = ", ".join(columns)
         sql = "INSERT INTO "+table+"("+columns+") VALUES("+attributes+")"
