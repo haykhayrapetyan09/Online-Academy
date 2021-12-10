@@ -58,7 +58,7 @@ def insert_student(n):
 if __name__ == '__main__':
     connector = ConnectionManager()
     generator = PersonGenerator()
-    # insert_instructor(50)
+    insert_instructor(50)
     insert_assistant(10)
-    # insert_student(200)
+    insert_student(200)
     connector.close()
