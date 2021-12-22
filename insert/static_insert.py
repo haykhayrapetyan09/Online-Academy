@@ -5,9 +5,9 @@ fake = Faker()
 
 
 with open("../resources/categories.txt") as file:
-    categories = json.load(file)
+    categories_dict = json.load(file)
 with open('../resources/universities.txt') as file:
-    universities = [line.strip() for line in file]
+    universities_list = [line.strip() for line in file]
 
 
 def insert_categories(categories):
@@ -62,6 +62,6 @@ def insert_universities(universities):
 
 if __name__ == '__main__':
     connector = ConnectionManager()
-    insert_universities(universities)
-    insert_categories(categories)
+    insert_universities(universities_list)
+    insert_categories(categories_dict)
     connector.close()
