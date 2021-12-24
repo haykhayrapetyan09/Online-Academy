@@ -36,7 +36,7 @@ class ConnectionManager:
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
-    def insert(self, table, columns, values, return_id=False, add_creation_date=False):
+    def insert(self, table, columns, values, return_id="", add_creation_date=False):
         if add_creation_date:
             values = values + (datetime.now().replace(microsecond=0),)
         attributes = ("%s,"*len(columns))[:-1]
@@ -51,8 +51,6 @@ class ConnectionManager:
                 return self.cur.fetchone()[0]
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
-            # if type(error).__name__ == "UniqueViolation":
-            #     raise Exception
 
     def insert_list(self, table, columns, values):
         attributes = ("%s," * len(columns))[:-1]
@@ -72,26 +70,18 @@ class ConnectionManager:
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
-    def get_columns(self, needed_cols, table, condition=False):
-        needed_cols = ", ".join(needed_cols)
+    def get_columns(self, needed_cols, table, condition=""):
+        if needed_cols != "*":
+            needed_cols = ", ".join(needed_cols)
         sql = "SELECT " + needed_cols + " FROM "+table
         if condition:
-            sql += " " +condition
+            sql += " " + condition
         try:
             self.cur.execute(sql)
             received_columns = self.cur.fetchall()
             return received_columns
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
-
-    # def get_ids(self, needed_ids, table):
-    #     sql = "SELECT %s FROM %s" % (needed_ids, table)
-    #     try:
-    #         self.cur.execute(sql)
-    #         received_ids = self.cur.fetchall()
-    #         return received_ids
-    #     except (Exception, psycopg2.DatabaseError) as error:
-    #         print(error)
 
 
 if __name__ == '__main__':
