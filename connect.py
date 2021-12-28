@@ -38,7 +38,8 @@ class ConnectionManager:
 
     def insert(self, table, columns, values, return_id="", add_creation_date=False):
         if add_creation_date:
-            values = values + (datetime.now().replace(microsecond=0), datetime.now().replace(microsecond=0))
+            current_datetime = datetime.now().replace(microsecond=0)
+            values = values + (current_datetime, current_datetime)
         attributes = ("%s,"*len(columns))[:-1]
         columns = ", ".join(columns)
         sql = "INSERT INTO "+table+"("+columns+") VALUES("+attributes+")"
