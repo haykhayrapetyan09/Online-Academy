@@ -94,7 +94,9 @@ CREATE INDEX instructor_university ON instructor(university_id);
 CREATE TABLE instructor_rating
 (
  instructor_id int PRIMARY KEY NOT NULL,
- rating        decimal(2,1)
+ rating        decimal(2,1),
+ creation_date timestamp,
+ modification_date timestamp
 );
 CREATE INDEX instructor_rating_instructor ON instructor_rating(instructor_id);
 
@@ -123,7 +125,9 @@ CREATE INDEX course_assistant ON course(assistant_id);
 CREATE TABLE course_rating
 (
  course_id     int PRIMARY KEY NOT NULL,
- rating        decimal(2,1)
+ rating        decimal(2,1),
+ creation_date timestamp,
+ modification_date timestamp
 );
 CREATE INDEX course_rating_course ON course_rating(course_id);
 
