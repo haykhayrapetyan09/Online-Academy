@@ -1,6 +1,6 @@
 # Online-Academy
 
-3 main problems that I came across and their solutions are described in Paper.docx file.
+3 main problems that I came across and their solutions are described in Paper.pdf file.
 
 This project is for inserting data to AWS Postgres Database (version 12.8),
 and generating random transaction data.
