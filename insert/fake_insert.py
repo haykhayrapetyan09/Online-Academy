@@ -5,6 +5,7 @@ from generator.person_generator import PersonGenerator
 
 def insert_instructor(n):
     print("Inserting instructors...")
+    
     instructor_column_names = connector.get_column_names("instructor")[1:-1]
     instructor_rating_column_names = connector.get_column_names("instructor_rating")
     universities_list = connector.get_columns(["university_id"], "university")
