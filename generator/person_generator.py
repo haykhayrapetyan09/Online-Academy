@@ -6,6 +6,7 @@ fake = Faker()
 
 class PersonGenerator:
     today = date.today()
+    
 
     def generate_person(self):
         person = {}
